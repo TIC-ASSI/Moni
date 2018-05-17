@@ -92,87 +92,89 @@ def data():
     payload = {
         'TOKEN' : sys.argv[1],
         'SERVER' : sys.argv[2],
-        'CPU' : {
-            'times' : {
-                'user' : { 'sec' : psutil.cpu_times().user, 'percent' : psutil.cpu_times_percent().user },
-                'system' : { 'sec' : psutil.cpu_times().system, 'percent' : psutil.cpu_times_percent().system },
-                'idle' : { 'sec' : psutil.cpu_times().idle, 'percent' : psutil.cpu_times_percent().idle },
-                'nice' : { 'sec' : psutil.cpu_times().nice, 'percent' : psutil.cpu_times_percent().nice },
-                'iowait' : { 'sec' : psutil.cpu_times().iowait, 'percent' : psutil.cpu_times_percent().iowait },
-                'irq' : { 'sec' : psutil.cpu_times().irq, 'percent' : psutil.cpu_times_percent().irq },
-                'softirq' : { 'sec' : psutil.cpu_times().softirq, 'percent' : psutil.cpu_times_percent().softirq },
-                'steal' : { 'sec' : psutil.cpu_times().steal, 'percent' : psutil.cpu_times_percent().steal },
-                'guest' : { 'sec' : psutil.cpu_times().guest, 'percent' : psutil.cpu_times_percent().guest },
-                'guest_nice' : { 'sec' : psutil.cpu_times().guest_nice, 'percent' : psutil.cpu_times_percent().guest_nice }
+        'DATA' : {
+            'CPU' : {
+                'times' : {
+                    'user' : { 'sec' : psutil.cpu_times().user, 'percent' : psutil.cpu_times_percent().user },
+                    'system' : { 'sec' : psutil.cpu_times().system, 'percent' : psutil.cpu_times_percent().system },
+                    'idle' : { 'sec' : psutil.cpu_times().idle, 'percent' : psutil.cpu_times_percent().idle },
+                    'nice' : { 'sec' : psutil.cpu_times().nice, 'percent' : psutil.cpu_times_percent().nice },
+                    'iowait' : { 'sec' : psutil.cpu_times().iowait, 'percent' : psutil.cpu_times_percent().iowait },
+                    'irq' : { 'sec' : psutil.cpu_times().irq, 'percent' : psutil.cpu_times_percent().irq },
+                    'softirq' : { 'sec' : psutil.cpu_times().softirq, 'percent' : psutil.cpu_times_percent().softirq },
+                    'steal' : { 'sec' : psutil.cpu_times().steal, 'percent' : psutil.cpu_times_percent().steal },
+                    'guest' : { 'sec' : psutil.cpu_times().guest, 'percent' : psutil.cpu_times_percent().guest },
+                    'guest_nice' : { 'sec' : psutil.cpu_times().guest_nice, 'percent' : psutil.cpu_times_percent().guest_nice }
+                },
+                'percentTotal' : psutil.cpu_percent(),
+                'count' : psutil.cpu_count(),
+                'stats' : {
+                    'switches' : psutil.cpu_stats().ctx_switches,
+                    'interrupts' : psutil.cpu_stats().interrupts,
+                    'softInterrupts' : psutil.cpu_stats().soft_interrupts,
+                    'syscalls' : psutil.cpu_stats().syscalls
+                },
+                'freq' : {
+                    'current' : psutil.cpu_freq().current,
+                    'min' : psutil.cpu_freq().min,
+                    'max' : psutil.cpu_freq().max
+                }
             },
-            'percentTotal' : psutil.cpu_percent(),
-            'count' : psutil.cpu_count(),
-            'stats' : {
-                'switches' : psutil.cpu_stats().ctx_switches,
-                'interrupts' : psutil.cpu_stats().interrupts,
-                'softInterrupts' : psutil.cpu_stats().soft_interrupts,
-                'syscalls' : psutil.cpu_stats().syscalls
+            'MEM' : {
+                'sys' : {
+                    'total' : psutil.virtual_memory().total,
+                    'available' : psutil.virtual_memory().available,
+                    'percent' : psutil.virtual_memory().percent,
+                    'used' : psutil.virtual_memory().used,
+                    'free' : psutil.virtual_memory().free,
+                    'active' : psutil.virtual_memory().active,
+                    'inactive' : psutil.virtual_memory().inactive,
+                    'buffers' : psutil.virtual_memory().buffers,
+                    'cached' : psutil.virtual_memory().cached,
+                    'shared' : psutil.virtual_memory().shared,
+                    'slab' : psutil.virtual_memory().slab
+                },
+                'swap' : {
+                    'total' : psutil.swap_memory().total,
+                    'used' : psutil.swap_memory().used,
+                    'free' : psutil.swap_memory().free,
+                    'percent' : psutil.swap_memory().percent,
+                    'sin' : psutil.swap_memory().sin,
+                    'sout' : psutil.swap_memory().sout
+                }
             },
-            'freq' : {
-                'current' : psutil.cpu_freq().current,
-                'min' : psutil.cpu_freq().min,
-                'max' : psutil.cpu_freq().max
+            'DISKS' : {
+                'device' : dsk(),
+                'usage' : usage(),
+                'statsIO' : {
+                    'numReads' : psutil.disk_io_counters().read_count,
+                    'numWrites' : psutil.disk_io_counters().write_count,
+                    'bytesRead' : psutil.disk_io_counters().read_bytes,
+                    'bytesWrite' : psutil.disk_io_counters().write_bytes,
+                    'readTime' : psutil.disk_io_counters().read_time,
+                    'writeTime' : psutil.disk_io_counters().write_time,
+                    'numMergReads' : psutil.disk_io_counters().read_merged_count,
+                    'numMergWrites' : psutil.disk_io_counters().write_merged_count,
+                    'busyTime' : psutil.disk_io_counters().busy_time
+                }
+            },
+            'NET' : {
+                'statsIO' : {
+                    'bytesSent' : psutil.net_io_counters().bytes_sent,
+                    'bytesRecv' : psutil.net_io_counters().bytes_recv,
+                    'packetsSent' : psutil.net_io_counters().packets_sent,
+                    'packetsRecv' : psutil.net_io_counters().packets_recv,
+                    'errin' : psutil.net_io_counters().errin,
+                    'errout' : psutil.net_io_counters().errout,
+                    'dropin' : psutil.net_io_counters().dropin,
+                    'dropout' : psutil.net_io_counters().dropout
+                },
+                'con' : conStats(),
+                'addrs' : addrs()
+            },
+            'SENS' : {
+                'temp' : temp()
             }
-        },
-        'MEM' : {
-            'sys' : {
-                'total' : psutil.virtual_memory().total,
-                'available' : psutil.virtual_memory().available,
-                'percent' : psutil.virtual_memory().percent,
-                'used' : psutil.virtual_memory().used,
-                'free' : psutil.virtual_memory().free,
-                'active' : psutil.virtual_memory().active,
-                'inactive' : psutil.virtual_memory().inactive,
-                'buffers' : psutil.virtual_memory().buffers,
-                'cached' : psutil.virtual_memory().cached,
-                'shared' : psutil.virtual_memory().shared,
-                'slab' : psutil.virtual_memory().slab
-            },
-            'swap' : {
-                'total' : psutil.swap_memory().total,
-                'used' : psutil.swap_memory().used,
-                'free' : psutil.swap_memory().free,
-                'percent' : psutil.swap_memory().percent,
-                'sin' : psutil.swap_memory().sin,
-                'sout' : psutil.swap_memory().sout
-            }
-        },
-        'DISKS' : {
-            'device' : dsk(),
-            'usage' : usage(),
-            'statsIO' : {
-                'numReads' : psutil.disk_io_counters().read_count,
-                'numWrites' : psutil.disk_io_counters().write_count,
-                'bytesRead' : psutil.disk_io_counters().read_bytes,
-                'bytesWrite' : psutil.disk_io_counters().write_bytes,
-                'readTime' : psutil.disk_io_counters().read_time,
-                'writeTime' : psutil.disk_io_counters().write_time,
-                'numMergReads' : psutil.disk_io_counters().read_merged_count,
-                'numMergWrites' : psutil.disk_io_counters().write_merged_count,
-                'busyTime' : psutil.disk_io_counters().busy_time
-            }
-        },
-        'NET' : {
-            'statsIO' : {
-                'bytesSent' : psutil.net_io_counters().bytes_sent,
-                'bytesRecv' : psutil.net_io_counters().bytes_recv,
-                'packetsSent' : psutil.net_io_counters().packets_sent,
-                'packetsRecv' : psutil.net_io_counters().packets_recv,
-                'errin' : psutil.net_io_counters().errin,
-                'errout' : psutil.net_io_counters().errout,
-                'dropin' : psutil.net_io_counters().dropin,
-                'dropout' : psutil.net_io_counters().dropout
-            },
-            'con' : conStats(),
-            'addrs' : addrs()
-        },
-        'SENS' : {
-            'temp' : temp()
         }
     }
 
