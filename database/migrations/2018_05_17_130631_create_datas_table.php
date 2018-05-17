@@ -13,7 +13,7 @@ class CreateDatasTable extends Migration
      */
     public function up()
     {
-        Schema::create('datas', function (Blueprint $table) {
+        Schema::create('data', function (Blueprint $table) {
             $table->increments('id');
             $table->string('server');
             $table->longtext('data');
@@ -29,6 +29,6 @@ class CreateDatasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('datas');
+        Schema::dropIfExists('data');
     }
 }
