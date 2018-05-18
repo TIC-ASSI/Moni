@@ -9,22 +9,21 @@ def dsk():
     l = []
     df = {}
     i = 0
-    for i,e in enumerate(prt):
-        di = { prt[i][0] : { 'mountpoint': prt[i][1], 'fstype': prt[i][2], 'opts': prt[i][3]}}
+    for i in prt:
+        di = { i[0] : { 'mountpoint': i[1], 'fstype': i[2], 'opts': i[3]}}
         df = {**df, **di}
-        l += [prt[i][0]]
-        i += 1
+        l += [i[0]]
     return (df)
 
 def usage():
     prt = psutil.disk_partitions()
     df = {}
-    for i,e in enumerate(prt):
-        di = { prt[i][0] : {
-        'total': psutil.disk_usage(prt[i][0]).total,
-        'used': psutil.disk_usage(prt[i][0]).used,
-        'free': psutil.disk_usage(prt[i][0]).free,
-        'percent': psutil.disk_usage(prt[i][0]).percent
+    for i in prt:
+        di = { i[0] : {
+        'total': psutil.disk_usage(i[0]).total,
+        'used': psutil.disk_usage(i[0]).used,
+        'free': psutil.disk_usage(i[0]).free,
+        'percent': psutil.disk_usage(i[0]).percent
         }}
         df = {**df, **di}
     return (df)
@@ -34,14 +33,13 @@ def conStats():
     items = []
     it = {}
     iti = {}
-    i = 0
     stable = 0
     listen = 0
     closeWait = 0
     timeWait = 0
     none = 0
-    for i,e in enumerate(con):
-        cond = con[i].status
+    for i in con:
+        cond = i.status
         if cond == 'ESTABLISHED':
             stable += 1
         elif cond == 'LISTEN':
@@ -52,12 +50,11 @@ def conStats():
             timeWait += 1
         else:
             none += 1
-        if con[i][4] != ():
-            iti = { 'ip': con[i][4][0], 'port': con[i][4][1] }
-        iti.update({ 'status': con[i].status, 'pid': con[i].pid })
+        if i[4] != ():
+            iti = { 'ip': i[4][0], 'port': i[4][1] }
+        iti.update({ 'status': i.status, 'pid': i.pid })
         it = {**it, **iti}
         items += [it]
-        i += 1
     return { 'total': len(con), 'stable': stable, 'listen': listen, 'timeWait': timeWait, 'closeWait': closeWait, 'none': none, 'items': items }
 
 def addrs():
@@ -215,7 +212,7 @@ def data():
 def main():
     while True:
         d = data()
-        #print (d)
+        print (d)
         time.sleep(int(sys.argv[3]))
 
 if __name__ == "__main__":
