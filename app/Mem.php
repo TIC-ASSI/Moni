@@ -12,7 +12,7 @@ class Mem extends Model
     *@var array
     */
     public $fillable = [
-      'total', 'avaiable', 'used', 'percent', 'free'
+      'total', 'available', 'used', 'percent', 'free'
     ];
     public function server()
     {
