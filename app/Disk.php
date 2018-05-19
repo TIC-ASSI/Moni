@@ -4,26 +4,19 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Net extends Model
+class DisK extends Model
 {
-    /**
-     * Stores the CPU table.
-     *
-     * @var string
-     */
-    public $table = 'net';
-
     /**
      * Mass assignable attributes.
      *
      * @var array
      */
     public $fillable = [
-        'total', 'stable', 'listen'
+        'device', 'mount_point', 'file_system', 'total', 'used', 'free', 'percent'
     ];
 
     /**
-     * Returns the net server.
+     * Returns the disk server.
      *
      * @return App\Server
      */
@@ -33,22 +26,12 @@ class Net extends Model
     }
 
     /**
-     * Return the server time.
+     * Return the disk time.
      *
      * @return App\Time
      */
     public function time()
     {
         return $this->belongsTo(Time::class);
-    }
-
-    /**
-     * Return the server address.
-     *
-     * @return App\Address
-     */
-    public function address()
-    {
-        return $this->hasMany(Address::class);
     }
 }

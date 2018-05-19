@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,10 +8,10 @@
     <title>{{ config('app.name') }} - @yield('title')</title>
     @yield('css')
 </head>
-<body>
-    <div id="app">
-        <div class="container mx-auto">
-            <div class="flex items-center justify-center h-full-w-full">
+<body class="h-full w-full bg-grey-light">
+    <div id="app" class="h-full">
+        <div class="container mx-auto h-full">
+            <div class="flex items-center justify-center h-full w-full">
                 @yield('content')
             </div>
         </div>

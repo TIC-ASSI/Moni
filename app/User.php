@@ -26,8 +26,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Return the user servers.
+     *
+     * @return Collection
+     */
     public function server()
     {
-      return $this -> hasMany(Server::class);
+        return $this -> hasMany(Server::class);
     }
 }
