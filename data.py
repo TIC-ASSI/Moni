@@ -9,8 +9,8 @@ def dsk():
     df = {}
     for i in prt:
         di = { i[0] : {
-        'mountpoint': i[1],
-        'fstype': i[2],
+        'mount_point': i[1],
+        'file_system': i[2],
         'total': psutil.disk_usage(i[0]).total,
         'used': psutil.disk_usage(i[0]).used,
         'free': psutil.disk_usage(i[0]).free,
@@ -42,27 +42,27 @@ def addrs():
 def data():
     url = 'https://erik.cat/api/aleix'
     payload = {
-        'TOKEN': sys.argv[1],
-        'SERVER': sys.argv[2],
-        'DATA': {
-            'CPU': {
+        'token': sys.argv[1],
+        'server': sys.argv[2],
+        'data': {
+            'cpu': {
                 'cores': psutil.cpu_count(),
                 'percent': psutil.cpu_percent(), # Total
-                'freq': psutil.cpu_freq().current,
-                'minFreq': psutil.cpu_freq().min,
-                'maxFreq': psutil.cpu_freq().max
+                'frequency': psutil.cpu_freq().current,
+                'min_frequency': psutil.cpu_freq().min,
+                'max_frequency': psutil.cpu_freq().max
             },
-            'MEM': { # System
+            'mem': { # System
                 'total': psutil.virtual_memory().total,
                 'available': psutil.virtual_memory().available,
                 'used': psutil.virtual_memory().used,
                 'percent': psutil.virtual_memory().percent,
                 'free': psutil.virtual_memory().free,
             },
-            'DISKS': dsk(),
-            'NET': conStats(),
-            'ADDRS': addrs(),
-            'PIDS': len(psutil.pids())
+            'disks': dsk(),
+            'net': conStats(),
+            'addresses': addrs(),
+            'pids': len(psutil.pids())
         }
     }
 
