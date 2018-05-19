@@ -17,7 +17,7 @@ def dsk():
         'percent': psutil.disk_usage(i[0]).percent
         } }
         df = {**df, **di}
-    return (df)
+    return df
 
 def conStats():
     con = psutil.net_connections()
@@ -37,7 +37,7 @@ def addrs():
     for e in ad.keys():
         sl = { e : ad[e][0].address }
         fl = {**fl, **sl}
-    return (fl)
+    return fl
 
 def data():
     url = 'https://erik.cat/api/aleix'
