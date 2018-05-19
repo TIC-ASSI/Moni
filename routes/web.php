@@ -14,13 +14,3 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/test', function () {
-  \App\Data::all() -> map -> delete(); 
-  $data = \App\Data::all();
-  dd($data);
-});
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
