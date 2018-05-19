@@ -17,11 +17,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/data',function(Request $request){
-    $attributes = $request->validate([
-        'server' => 'required',
-        'token' => 'required',
-        'data' => 'required'
-    ]);
-    return \App\User::first()->data()->create($attributes);
-});
+// Route::post('/data',function(Request $request){
+//     $attributes = $request->validate([
+//         'server' => 'required',
+//         'token' => 'required',
+//         'data' => 'required'
+//     ]);
+//     return \App\User::first()->data()->create($attributes);
+// });
+
+Route::post('/data', 'DataController@data');
