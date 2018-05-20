@@ -13,4 +13,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('/data', 'DataController@data');
+Route::post('/login', 'AppController@login');
+Route::post('/register', 'AppController@register');
+
+Route::middleware('auth:api')->group(function () {
+    Route::post('/servers', 'AppController@servers');
+    Route::post('/data', 'MoniController@data');
+});

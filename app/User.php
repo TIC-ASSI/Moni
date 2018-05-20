@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'api_key'
+        'name', 'email', 'password', 'api_token'
     ];
 
     /**
@@ -28,12 +28,23 @@ class User extends Authenticatable
     ];
 
     /**
+     * Mutator to automatically hash the user password.
+     *
+     * @param string $value
+     * @return void
+     */
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
+
+    /**
      * Return the user servers.
      *
      * @return Collection
      */
-    public function server()
+    public function servers()
     {
-        return $this -> hasMany(Server::class);
+        return $this->hasMany(Server::class);
     }
 }

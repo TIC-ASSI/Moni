@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class DisK extends Model
+class Disk extends Model
 {
     /**
      * Mass assignable attributes.

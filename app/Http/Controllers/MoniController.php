@@ -15,59 +15,86 @@ class MoniController extends Controller
      */
     public function data(Request $request)
     {
-        $user = User::where('token', $request->token)->firstOrFail();
+        $user = auth('api')->user();
 
-        $server = $user->servers()->where('name', $request->server)->firstOrCreate([
-            'name' => $request->server
+        $server = $user->servers()->where('name', $request->get('server'))->firstOrCreate([
+            'name'      => $request->get('server'),
+            'os'        => $request->get('os'),
+            'version'   => $request->get('version'),
+            'node'      => $request->get('node'),
+            'processor' => $request->get('processor'),
+            'platform'   => $request->get('platform'),
         ]);
 
-        $data = $request->data;
+        $server->update([
+            'os'        => $request->get('os'),
+            'version'   => $request->get('version'),
+            'node'      => $request->get('node'),
+            'processor' => $request->get('processor'),
+            'platform'   => $request->get('platform'),
+        ]);
+
+        $data = $request->get('data');
 
         // CPU
-        $server->cpu()->where('time_id', null)->updateOrcreate([
-            'cores'         => $data->cpu->cores,
-            'percent'       => $data->cpu->percent,
-            'frequency'     => $data->cpu->frequency,
-            'min_frequency' => $data->cpu->min_frequency,
-            'max_frequency' => $data->cpu->max_frequency
+        $server->cpus()->updateOrcreate([
+            'time_id' => null
+        ], [
+            'cores'         => $data['cpu']['cores'],
+            'percent'       => $data['cpu']['percent'],
+            'frequency'     => $data['cpu']['frequency'],
+            'min_frequency' => $data['cpu']['min_frequency'],
+            'max_frequency' => $data['cpu']['max_frequency']
         ]);
 
-        // Address
-        $server->address()->where('time_id', null)->updateOrcreate([
-            'name'  => $data->address->name,
-            'ip'    => $data->address->ip
-        ]);
+        // Disks
+        $server->disks()->where('time_id', null)->delete();
 
-        // Disc
-        $server->disc()->where('time_id', null)->updateOrcreate([
-            'devices'       => $data->disc->device,
-            'mount_point'   => $data->disc->mount_point,
-            'file_system'   => $data->disc->file_system,
-            'total'         => $data->disc->total,
-            'used'          => $data->disc->used,
-            'free'          => $data->disc->free,
-            'percent'       => $data->disc->percent
-        ]);
+        foreach ($data['disks'] as $key => $disk) {
+            $server->disks()->create([
+                'device'       => $key,
+                'mount_point'   => $disk['mount_point'],
+                'file_system'   => $disk['file_system'],
+                'total'         => round($disk['total'] * 9.31e-10),
+                'used'          => round($disk['used'] * 9.31e-10),
+                'free'          => round($disk['free'] * 9.31e-10),
+                'percent'       => $disk['percent']
+            ]);
+        }
 
         // Mem
-        $server->mem()->where('time_id', null)->updateOrcreate([
-            'total'     => $data->mem->total,
-            'available' => $data->mem->available,
-            'used'      => $data->mem->used,
-            'percent'   => $data->mem->percent,
-            'free'      => $data->mem->free
+        $server->mems()->updateOrcreate([
+            'time_id' => null
+        ], [
+            'total'     => round($data['mem']['total'] * 9.31e-10),
+            'available' => round($data['mem']['available'] * 9.31e-10),
+            'used'      => round($data['mem']['used'] * 9.31e-10),
+            'percent'   => $data['mem']['percent'],
+            'free'      => round($data['mem']['free'] * 9.31e-10)
         ]);
 
         // Net
-        $server->net()->where('time_id', null)->updateOrcreate([
-            'total' => $data->net->total,
-            'stable' => $data->net->stable,
-            'listen' => $data->net->listen
+        $net = $server->nets()->updateOrcreate([
+            'time_id' => null
+        ], [
+            'total' => $data['net']['total'],
+            'stable' => $data['net']['stable'],
+            'listen' => $data['net']['listen']
         ]);
 
+        $net->addresses()->delete();
+        foreach ($data['addresses'] as $key => $address) {
+            $net->addresses()->create([
+                'name'  => $key,
+                'ip'    => $address
+            ]);
+        }
+
         // Pid
-        $server->pid()->where('time_id', null)->updateOrcreate([
-            'number' => $data->net->number
+        $server->pids()->updateOrcreate([
+            'time_id' => null
+        ],[
+            'number' => $data['pids']
         ]);
 
         return [

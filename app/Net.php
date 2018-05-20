@@ -47,7 +47,7 @@ class Net extends Model
      *
      * @return App\Address
      */
-    public function address()
+    public function addresses()
     {
         return $this->hasMany(Address::class);
     }

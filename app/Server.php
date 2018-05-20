@@ -12,7 +12,7 @@ class Server extends Model
      * @var array
      */
     public $fillable = [
-        'name'
+        'name', 'os', 'version', 'processor', 'node', 'platform'
     ];
 
     /**
@@ -26,11 +26,11 @@ class Server extends Model
     }
 
     /**
-     * Returns the server PID.
+     * Returns the server PIDs.
      *
      * @return App\Pid
      */
-    public function pid()
+    public function pids()
     {
         return $this->hasMany(Pid::class);
     }
@@ -40,7 +40,7 @@ class Server extends Model
      *
      * @return App\Net
      */
-    public function net()
+    public function nets()
     {
         return $this->hasMany(Net::class);
     }
@@ -50,7 +50,7 @@ class Server extends Model
      *
      * @return App\Mem
      */
-    public function mem()
+    public function mems()
     {
         return $this->hasMany(Mem::class);
     }
@@ -60,7 +60,7 @@ class Server extends Model
      *
      * @return App\Cpu
      */
-    public function cpu()
+    public function cpus()
     {
         return $this->hasMany(Cpu::class);
     }
@@ -70,7 +70,7 @@ class Server extends Model
      *
      * @return App\Disk
      */
-    public function disk()
+    public function disks()
     {
         return $this->hasMany(Disk::class);
     }

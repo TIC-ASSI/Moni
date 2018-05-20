@@ -16,6 +16,11 @@ class CreateServersTable extends Migration
         Schema::create('servers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('os');
+            $table->string('version');
+            $table->string('platform');
+            $table->string('processor');
+            $table->string('node');
             $table->integer('user_id');
             $table->timestamps();
         });
