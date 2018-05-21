@@ -1,44 +1,23 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Vuetify from 'vuetify'
 import VueRouter from 'vue-router'
-import VueMaterial from 'vue-material'
-import 'vue-material/dist/vue-material.min.css'
+import 'vuetify/dist/vuetify.min.css'
+import colors from 'vuetify/es5/util/colors'
 
 Vue.use(Vuex)
+Vue.use(Vuetify, {
+    theme: {
+        primary: colors.indigo.accent3
+    }
+})
 Vue.use(VueRouter)
-Vue.use(VueMaterial)
 
 import App from './views/App'
-import Home from './views/Home'
 import Login from './views/Login'
+import Server from './views/Server'
 import Servers from './views/Servers'
 import Register from './views/Register'
-
-const router = new VueRouter({
-    mode: 'history',
-    routes: [
-        {
-            path: '/',
-            name: 'home',
-            component: Home
-        },
-        {
-            path: '/login',
-            name: 'login',
-            component: Login,
-        },
-        {
-            path: '/register',
-            name: 'register',
-            component: Register,
-        },
-        {
-            path: '/servers',
-            name: 'servers',
-            component: Servers,
-        },
-    ],
-});
 
 const store = new Vuex.Store({
     state: {
@@ -56,14 +35,12 @@ const store = new Vuex.Store({
         user(state, p) {
             state.user = p
             localStorage.setItem('user', JSON.stringify(p))
-            console.log('ADDED')
         },
         getUser(state) {
             var user = localStorage.getItem('user')
             if (user) {
                 state.user = JSON.parse(user)
             }
-            console.log(state.user)
         },
         logout(state) {
             localStorage.removeItem('user')
@@ -71,6 +48,65 @@ const store = new Vuex.Store({
         }
     }
 })
+
+store.commit('getUser')
+
+const router = new VueRouter({
+    mode: 'history',
+    routes: [
+        {
+            path: '/',
+            name: 'servers',
+            component: Servers,
+            beforeEnter: (to, from, next) => {
+                if (store.state.user == null) {
+                    router.push({ name: 'login' })
+                }
+                next()
+            }
+        },
+        {
+            path: '/login',
+            name: 'login',
+            component: Login,
+            beforeEnter: (to, from, next) => {
+                if (store.state.user != null) {
+                    router.push({ name: 'servers' })
+                }
+                next()
+            }
+        },
+        {
+            path: '/register',
+            name: 'register',
+            component: Register,
+            beforeEnter: (to, from, next) => {
+                if (store.state.user != null) {
+                    router.push({ name: 'servers' })
+                }
+                next()
+            }
+        },
+        {
+            path: '/servers/:id',
+            name: 'server',
+            component: Server,
+            beforeEnter: (to, from, next) => {
+                if (store.state.user == null) {
+                    router.push({ name: 'login' })
+                }
+                next()
+            }
+        },
+        {
+            path: '*',
+            name: 'not_found',
+            component: {
+                created: () => router.push('/')
+            }
+        }
+    ],
+});
 
 const app = new Vue({
     el: '#app',

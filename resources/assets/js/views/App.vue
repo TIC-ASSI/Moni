@@ -1,84 +1,55 @@
 <template>
-  <div class="page-container" style="height: 100%;">
-    <md-app md-waterfall md-mode="fixed-last" style="height: 100%;">
-      <md-app-toolbar class="md-large md-dense md-primary">
-        <div class="md-toolbar-row">
-          <div class="md-toolbar-section-start">
-            <md-button class="md-icon-button" @click="menuVisible = !menuVisible">
-              <md-icon>menu</md-icon>
-            </md-button>
-
-            <span class="md-title">Monitoring</span>
-          </div>
-
-          <div class="md-toolbar-section-end">
-            <md-button class="md-icon-button">
-              <md-icon>more_vert</md-icon>
-            </md-button>
-          </div>
-        </div>
-
-        <div class="md-toolbar-row">
-          <md-tabs class="md-primary" md-sync-route>
-            <md-tab id="tab-home" md-label="Home" to="/"></md-tab>
-            <md-tab :md-disabled="$store.state.user != null" id="tab-login" md-label="Login" to="/login"></md-tab>
-            <md-tab :md-disabled="$store.state.user != null" id="tab-register" md-label="Register" to="/register"></md-tab>
-            <md-tab :md-disabled="$store.state.user == null" id="tab-servers" md-label="My servers" to="/servers"></md-tab>
-          </md-tabs>
-        </div>
-      </md-app-toolbar>
-
-      <md-app-drawer :md-active.sync="menuVisible">
-        <md-toolbar class="md-transparent" md-elevation="0">Navigation</md-toolbar>
-
-        <md-list>
-          <md-list-item>
-            <md-icon>move_to_inbox</md-icon>
-            <span class="md-list-item-text">Inbox</span>
-          </md-list-item>
-
-          <md-list-item>
-            <md-icon>send</md-icon>
-            <span class="md-list-item-text">Sent Mail</span>
-          </md-list-item>
-
-          <md-list-item>
-            <md-icon>delete</md-icon>
-            <span class="md-list-item-text">Trash</span>
-          </md-list-item>
-
-          <md-list-item>
-            <md-icon>error</md-icon>
-            <span class="md-list-item-text">Spam</span>
-          </md-list-item>
-        </md-list>
-      </md-app-drawer>
-
-      <md-app-content>
-        <transition mode="out-in" name="page">
-            <router-view></router-view>
-        </transition>
-        <md-snackbar md-position="center" :md-active.sync="$store.state.messageShow" md-persistent>
-            <span>{{ $store.state.message }}</span>
-            <md-button class="md-accent" @click="$store.commit('messageShow', false)">Close</md-button>
-        </md-snackbar>
-      </md-app-content>
-    </md-app>
-  </div>
+    <v-app class="grey lighten-4">
+        <v-toolbar dark color="primary" extended tabs app>
+            <v-toolbar-side-icon></v-toolbar-side-icon>
+            <v-toolbar-title>Monitoring</v-toolbar-title>
+            <v-tabs
+                slot="extension"
+                align-with-title
+                color="primary"
+                slider-color="white"
+            >
+                <v-tab :disabled="!$store.state.user" :to="{ name: 'servers' }" exact>
+                    My servers
+                </v-tab>
+                <v-tab :disabled="$store.state.user != null" :to="{ name: 'login' }" exact>
+                    Login
+                </v-tab>
+                <v-tab :disabled="$store.state.user != null" :to="{ name: 'register' }" exact>
+                    Register
+                </v-tab>
+                <v-tab @click="logout" :disabled="!$store.state.user" exact>
+                    Logout
+                </v-tab>
+            </v-tabs>
+        </v-toolbar>
+        <v-content style="margin-top: 50px;">
+            <v-container wrap>
+                <transition name="page" mode="out-in" appear>
+                    <router-view></router-view>
+                </transition>
+            </v-container>
+        </v-content>
+        <v-snackbar
+        :timeout="6000"
+        top
+        v-model="$store.state.messageShow"
+        >
+            {{ $store.state.message }}
+            <v-btn flat color="pink" @click.native="$store.state.messageShow = false">Close</v-btn>
+        </v-snackbar>
+    </v-app>
 </template>
-
-<style lang="scss" scoped>
-  .md-drawer {
-    width: 230px;
-    max-width: calc(100vw - 125px);
-  }
-</style>
 
 <script>
 export default {
-  name: 'LastRowFixed',
-  data: () => ({
-    menuVisible: false
-  })
+    methods: {
+        logout() {
+            this.$store.commit('message', "See you soon, " + this.$store.state.user.name)
+            this.$store.commit('messageShow', true)
+            this.$store.commit('logout')
+            this.$router.push('/login')
+        },
+    }
 }
 </script>

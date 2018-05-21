@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Hash;
 use App\User;
+use App\Server;
 use Illuminate\Http\Request;
 
 class AppController extends Controller
@@ -81,7 +82,35 @@ class AppController extends Controller
      */
     public function servers(Request $request)
     {
-        sleep(2);
         return auth('api')->user()->servers;
+    }
+
+    /**
+     * Returns the server.
+     *
+     * @param Server $server
+     * @return Server
+     */
+    public function server(Server $server)
+    {
+        if (!in_array($server->id, auth('api')->user()->servers->map->id->toArray())) {
+            return response([
+                'message' => 'You are not authorized to see this server.',
+                'errors' => [],
+            ], 403);
+        }
+
+        // Aixo es tot de tot
+        // $server->load(['cpus', 'nets', 'nets.addresses', 'disks', 'mems', 'pids']);
+
+        $server->current = [
+            'cpu' => $server->cpus()->where('time_id', null)->first(),
+            'net' => $server->nets()->where('time_id', null)->with('addresses')->first(),
+            'disks' => $server->disks()->where('time_id', null)->get(),
+            'mem' => $server->mems()->where('time_id', null)->first(),
+            'pid' => $server->pids()->where('time_id', null)->first()
+        ];
+
+        return $server;
     }
 }

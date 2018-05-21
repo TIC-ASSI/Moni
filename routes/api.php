@@ -18,5 +18,6 @@ Route::post('/register', 'AppController@register');
 
 Route::middleware('auth:api')->group(function () {
     Route::post('/servers', 'AppController@servers');
+    Route::post('/servers/{server}', 'AppController@server');
     Route::post('/data', 'MoniController@data');
 });

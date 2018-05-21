@@ -91,4 +91,10 @@ def main():
         time.sleep(60)
 
 if __name__ == "__main__":
+    if len(sys.argv) == 1:
+        print('The api_token is missing, please enter the API token as the first parameter')
+        sys.exit(0)
+    if len(sys.argv) == 2:
+        print('The server_name is missing, please enter a server name as a second parameter. It will be created if it did not exist')
+        sys.exit(0)
     main()
