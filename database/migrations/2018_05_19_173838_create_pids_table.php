@@ -16,7 +16,7 @@ class CreatePidsTable extends Migration
         Schema::create('pids', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('server_id');
-            $table->integer('number');
+            $table->integer('number')->nullable();
             $table->integer('time_id')->nullable();
             $table->timestamps();
         });

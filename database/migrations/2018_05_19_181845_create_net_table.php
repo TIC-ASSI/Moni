@@ -16,9 +16,9 @@ class CreateNetTable extends Migration
         Schema::create('net', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('server_id');
-            $table->integer('total');
-            $table->integer('stable');
-            $table->integer('listen');
+            $table->integer('total')->nullable();
+            $table->integer('stable')->nullable();
+            $table->integer('listen')->nullable();
             $table->integer('time_id')->nullable();
             $table->timestamps();
         });

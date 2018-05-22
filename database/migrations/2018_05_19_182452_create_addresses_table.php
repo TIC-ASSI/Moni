@@ -16,8 +16,8 @@ class CreateAddressesTable extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('net_id');
-            $table->string('name');
-            $table->string('ip');
+            $table->string('name')->nullable();
+            $table->string('ip')->nullable();
             $table->timestamps();
         });
     }

@@ -16,13 +16,13 @@ class CreateDisksTable extends Migration
         Schema::create('disks', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('server_id');
-            $table->string('device');
-            $table->string('mount_point');
-            $table->string('file_system');
-            $table->integer('total');
-            $table->integer('used');
-            $table->integer('free');
-            $table->decimal('percent',4,1);
+            $table->string('device')->nullable();
+            $table->string('mount_point')->nullable();
+            $table->string('file_system')->nullable();
+            $table->integer('total')->nullable();
+            $table->integer('used')->nullable();
+            $table->integer('free')->nullable();
+            $table->decimal('percent', 4, 1)->nullable();
             $table->integer('time_id')->nullable();
             $table->timestamps();
         });

@@ -8,13 +8,13 @@ def dsk():
     prt = psutil.disk_partitions()
     df = {}
     for i in prt:
-        di = { i[0] : {
-        'mount_point': i[1],
-        'file_system': i[2],
-        'total': psutil.disk_usage(i[0]).total,
-        'used': psutil.disk_usage(i[0]).used,
-        'free': psutil.disk_usage(i[0]).free,
-        'percent': psutil.disk_usage(i[0]).percent
+        di = { i.device : {
+        'mount_point': i.mountpoint,
+        'file_system': i.fstype,
+        'total': psutil.disk_usage(i.mountpoint).total,
+        'used': psutil.disk_usage(i.mountpoint).used,
+        'free': psutil.disk_usage(i.mountpoint).free,
+        'percent': psutil.disk_usage(i.mountpoint).percent
         } }
         df = {**df, **di}
     return df
@@ -43,7 +43,8 @@ def addrs():
     return fl
 
 def data():
-    url = 'http://moni.test/api/data?api_token=' + sys.argv[2]
+
+    url = 'http://localhost:8000/api/data?api_token=' + sys.argv[2]
     payload = {
         'server': sys.argv[1],
         'os': platform.system(),
@@ -72,7 +73,9 @@ def data():
             'pids': len(psutil.pids())
         }
     }
-
+    print(payload)
+    print()
+    print()
     r = requests.post(url, json = payload, headers = {'Accept': 'application/json'})
 
     if r.status_code == 200:
@@ -92,9 +95,9 @@ def main():
 
 if __name__ == "__main__":
     if len(sys.argv) == 1:
-        print('The api_token is missing, please enter the API token as the first parameter')
+        print('The server_name is missing, please enter a server name as a first parameter. It will be created if it did not exist')
         sys.exit(0)
     if len(sys.argv) == 2:
-        print('The server_name is missing, please enter a server name as a second parameter. It will be created if it did not exist')
+        print('The api_token is missing, please enter the API token as the second parameter')
         sys.exit(0)
     main()

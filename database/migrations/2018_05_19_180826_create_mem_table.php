@@ -16,11 +16,11 @@ class CreateMemTable extends Migration
         Schema::create('mem', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('server_id');
-            $table->integer('total');
-            $table->integer('available');
-            $table->integer('used');
-            $table->decimal('percent',4,1);
-            $table->integer('free');
+            $table->integer('total')->nullable();
+            $table->integer('available')->nullable();
+            $table->integer('used')->nullable();
+            $table->decimal('percent', 4, 1)->nullable();
+            $table->integer('free')->nullable();
             $table->integer('time_id')->nullable();
             $table->timestamps();
         });

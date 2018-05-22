@@ -16,11 +16,11 @@ class CreateCpuTable extends Migration
         Schema::create('cpu', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('server_id');
-            $table->integer('cores');
-            $table->decimal('percent',4,1);
-            $table->decimal('frequency',6,2);
-            $table->decimal('min_frequency',6,2);
-            $table->decimal('max_frequency',6,2);
+            $table->integer('cores')->nullable();
+            $table->decimal('percent', 4, 1)->nullable();
+            $table->decimal('frequency', 6, 2)->nullable();
+            $table->decimal('min_frequency', 6, 2)->nullable();
+            $table->decimal('max_frequency', 6, 2)->nullable();
             $table->integer('time_id')->nullable();
             $table->timestamps();
         });
