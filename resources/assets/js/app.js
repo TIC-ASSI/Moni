@@ -60,6 +60,8 @@ const router = new VueRouter({
             component: Servers,
             beforeEnter: (to, from, next) => {
                 if (store.state.user == null) {
+                    store.commit('message', 'Unauthenticated.')
+                    store.commit('messageShow', true)
                     router.push({ name: 'login' })
                 }
                 next()
@@ -93,6 +95,8 @@ const router = new VueRouter({
             component: Server,
             beforeEnter: (to, from, next) => {
                 if (store.state.user == null) {
+                    store.commit('message', 'Unauthenticated.')
+                    store.commit('messageShow', true)
                     router.push({ name: 'login' })
                 }
                 next()

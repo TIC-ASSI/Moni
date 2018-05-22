@@ -19,9 +19,9 @@ class CreateDisksTable extends Migration
             $table->string('device')->nullable();
             $table->string('mount_point')->nullable();
             $table->string('file_system')->nullable();
-            $table->integer('total')->nullable();
-            $table->integer('used')->nullable();
-            $table->integer('free')->nullable();
+            $table->decimal('total', 7, 2)->nullable();
+            $table->decimal('used', 7, 2)->nullable();
+            $table->decimal('free', 7, 2)->nullable();
             $table->decimal('percent', 4, 1)->nullable();
             $table->integer('time_id')->nullable();
             $table->timestamps();

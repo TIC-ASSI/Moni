@@ -1,9 +1,75 @@
 <template>
     <v-layout row wrap>
+        <v-flex xs12 s12 md6>
+            <v-card class="elevation-2">
+                <v-card-title>
+                    <span class="headline">Instructions</span>
+                </v-card-title>
+                <v-container fill-height fluid>
+                        <v-layout fill-height wrap>
+                            <v-flex xs12>
+                                <p>
+                                    To add a new server to the monitoring system, download the tool for the
+                                    desired platform and execute it with the following parameters
+                                    (Please note that the order is important):
+                                </p>
+                                <p>
+                                    <b>API_TOKEN:</b> Required.
+                                    Used to authenticate you to the server.
+                                </p>
+                                <p>
+                                    <b>SERVER_NAME:</b> Required.
+                                    Determines the server name to be used.
+                                    It will create one for you if it did not exist.
+                                </p>
+                                <p>
+                                    <b>INTERVAL: (sec)</b> Optional.
+                                    Defaults to 60 seconds.
+                                </p>
+                                <p>
+                                    You may copy and paste your API_TOKEN from below:<br><br>
+                                    <code>{{ $store.state.user.api_token }}</code>
+                                </p>
+                            </v-flex>
+                        </v-layout>
+                </v-container>
+            </v-card>
+        </v-flex>
+        <v-flex xs12 s12 md6>
+            <v-card class="elevation-2">
+                <v-card-title>
+                    <span class="headline">Download</span>
+                </v-card-title>
+                <v-container fill-height fluid>
+                        <v-layout fill-height wrap>
+                            <v-flex xs12>
+                                <p>
+                                    Download the native application for the desired platform. To execute it
+                                    we provide an example command to be executed on the download path of the application:
+                                </p>
+                                <p>
+                                    <v-btn @click="download('linux')" color="primary">Linux Download</v-btn>
+                                    <br>
+                                    <code>./monitoring {{ $store.state.user.api_token }} Server1 60</code>
+                                </p>
+                                <p>
+                                    <v-btn @click="download('windows')" color="primary">Windows Download</v-btn>
+                                    <br>
+                                    <code>.\monitoring.exe {{ $store.state.user.api_token }} Server1 60</code>
+                                </p>
+                                <p>
+                                    This example code will create a server named <b>Server1</b> with a refresh
+                                    interval of <b>60</b> seconds.
+                                </p>
+                            </v-flex>
+                        </v-layout>
+                </v-container>
+            </v-card>
+        </v-flex>
         <v-flex xs12 s12>
             <v-card class="elevation-2">
                 <v-card-title>
-                    Servers
+                    <span class="headline">Servers</span>
                     <v-spacer></v-spacer>
                     <v-text-field
                         v-model="search"
@@ -22,7 +88,7 @@
                         { text: 'Version', value: 'version' },
                         { text: 'Platform', value: 'platform' },
                         { text: 'Processor', value: 'processor' },
-                        { text: 'Created at', value: 'created_at' },
+                        { text: 'Last update', value: 'updated_at' },
                         { text: 'Options' },
                     ]"
                     :loading="!loaded"
@@ -34,10 +100,10 @@
                         <td>{{ props.item.name }}</td>
                         <td>{{ props.item.node }}</td>
                         <td>{{ props.item.os }}</td>
-                        <td >{{ props.item.version }}</td>
+                        <td>{{ props.item.version }}</td>
                         <td>{{ props.item.platform }}</td>
                         <td>{{ props.item.processor }}</td>
-                        <td>{{ createdAt(props.item.created_at) }}</td>
+                        <td>{{ timeAt(props.item.updated_at) }}</td>
                         <td>
                             <v-btn icon class="mx-0" :to="{ name: 'server', params: { id: props.item.id } }">
                                 <v-icon color="grey">remove_red_eye</v-icon>
@@ -59,7 +125,6 @@
             servers: [],
             loaded: false,
             search: [],
-            server_name: 'sample_server',
         }),
         computed: {
             created_date() {
@@ -78,9 +143,23 @@
                     .catch(err => {
                         this.$store.commit('message', err.response.data.message)
                         this.$store.commit('messageShow', true)
+                        if (err.response.status == 401) {
+                            this.$store.commit('logout')
+                            this.$router.push({ name: 'login' })
+                        }
                     })
             },
-            createdAt(at) {
+            download(platform) {
+                var name = 'monitoring'
+                var url = '/app/monitoring'
+                if (platform == 'windows') {
+                    name = 'monitoring.exe'
+                    url = '/app/' + name
+                }
+                window.location.href = url;
+                console.log('OK')
+            },
+            timeAt(at) {
                 return moment(at).fromNow()
             }
         },

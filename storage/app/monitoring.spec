@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['monitoring.py'],
-             pathex=['/home/erik/UPC/APPS/moni/storage/app'],
+             pathex=['C:\\laragon\\www\\Moni\\storage\\app'],
              binaries=[],
              datas=[],
              hiddenimports=[],

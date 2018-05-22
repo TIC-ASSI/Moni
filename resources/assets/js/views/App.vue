@@ -1,5 +1,5 @@
 <template>
-    <v-app class="grey lighten-4">
+    <v-app>
         <v-toolbar dark color="primary" extended tabs app>
             <v-toolbar-side-icon></v-toolbar-side-icon>
             <v-toolbar-title>Monitoring</v-toolbar-title>
@@ -24,7 +24,7 @@
             </v-tabs>
         </v-toolbar>
         <v-content style="margin-top: 50px;">
-            <v-container wrap>
+            <v-container wrap grid-list-lg>
                 <transition name="page" mode="out-in" appear>
                     <router-view></router-view>
                 </transition>

@@ -1,12 +1,15 @@
-missing module named org - imported by pickle, /home/erik/UPC/APPS/moni/storage/app/monitoring.py
-excluded module named _frozen_importlib - imported by importlib, importlib.abc, /home/erik/UPC/APPS/moni/storage/app/monitoring.py
-missing module named _frozen_importlib_external - imported by importlib._bootstrap, importlib, importlib.abc, /home/erik/UPC/APPS/moni/storage/app/monitoring.py
-missing module named _winreg - imported by platform, requests.utils, /home/erik/UPC/APPS/moni/storage/app/monitoring.py
+missing module named resource - imported by posix, C:\laragon\www\Moni\storage\app\monitoring.py
+missing module named posix - imported by os, C:\laragon\www\Moni\storage\app\monitoring.py
+missing module named _posixsubprocess - imported by subprocess, C:\laragon\www\Moni\storage\app\monitoring.py
+missing module named readline - imported by cmd, code, pdb, C:\laragon\www\Moni\storage\app\monitoring.py
+excluded module named _frozen_importlib - imported by importlib, importlib.abc, C:\laragon\www\Moni\storage\app\monitoring.py
+missing module named _frozen_importlib_external - imported by importlib._bootstrap, importlib, importlib.abc, C:\laragon\www\Moni\storage\app\monitoring.py
+missing module named _winreg - imported by platform, requests.utils, C:\laragon\www\Moni\storage\app\monitoring.py
 missing module named _scproxy - imported by urllib.request
-missing module named java - imported by platform, /home/erik/UPC/APPS/moni/storage/app/monitoring.py
-missing module named 'java.lang' - imported by platform, /home/erik/UPC/APPS/moni/storage/app/monitoring.py, xml.sax._exceptions
-missing module named vms_lib - imported by platform, /home/erik/UPC/APPS/moni/storage/app/monitoring.py
-missing module named winreg - imported by platform, mimetypes, urllib.request, requests.utils, /home/erik/UPC/APPS/moni/storage/app/monitoring.py
+missing module named java - imported by platform, C:\laragon\www\Moni\storage\app\monitoring.py
+missing module named 'java.lang' - imported by platform, C:\laragon\www\Moni\storage\app\monitoring.py, xml.sax._exceptions
+missing module named vms_lib - imported by platform, C:\laragon\www\Moni\storage\app\monitoring.py
+missing module named termios - imported by tty, getpass, C:\laragon\www\Moni\storage\app\monitoring.py
 missing module named urllib.getproxies_environment - imported by urllib, requests.compat
 missing module named urllib.proxy_bypass_environment - imported by urllib, requests.compat
 missing module named urllib.proxy_bypass - imported by urllib, requests.compat
@@ -16,11 +19,11 @@ missing module named urllib.unquote_plus - imported by urllib, requests.compat
 missing module named urllib.quote_plus - imported by urllib, requests.compat
 missing module named urllib.unquote - imported by urllib, requests.compat
 missing module named urllib.quote - imported by urllib, requests.compat
-missing module named nt - imported by os, shutil, ntpath, /home/erik/UPC/APPS/moni/storage/app/monitoring.py
-missing module named msvcrt - imported by subprocess, getpass, /home/erik/UPC/APPS/moni/storage/app/monitoring.py
-missing module named _winapi - imported by subprocess, /home/erik/UPC/APPS/moni/storage/app/monitoring.py
-missing module named _dummy_threading - imported by dummy_threading, /home/erik/UPC/APPS/moni/storage/app/monitoring.py
-missing module named 'org.python' - imported by copy, /home/erik/UPC/APPS/moni/storage/app/monitoring.py, xml.sax
+missing module named grp - imported by shutil, tarfile, C:\laragon\www\Moni\storage\app\monitoring.py
+missing module named _dummy_threading - imported by dummy_threading, C:\laragon\www\Moni\storage\app\monitoring.py
+missing module named 'org.python' - imported by copy, C:\laragon\www\Moni\storage\app\monitoring.py, xml.sax
+missing module named pwd - imported by posixpath, shutil, tarfile, http.server, webbrowser, psutil, netrc, getpass, C:\laragon\www\Moni\storage\app\monitoring.py
+missing module named org - imported by pickle, C:\laragon\www\Moni\storage\app\monitoring.py
 missing module named backports - imported by urllib3.packages.ssl_match_hostname
 missing module named _abcoll - imported by urllib3.packages.ordered_dict
 missing module named dummy_thread - imported by urllib3.packages.ordered_dict
@@ -33,8 +36,6 @@ missing module named urlparse - imported by requests.compat
 missing module named simplejson - imported by requests.compat
 missing module named Queue - imported by urllib3.connectionpool
 missing module named "'urllib3.packages.six.moves.urllib'.parse" - imported by urllib3.request, urllib3.poolmanager
-missing module named netbios - imported by uuid
-missing module named win32wnet - imported by uuid
 runtime module named urllib3.packages.six.moves - imported by http.client, urllib3.connectionpool, urllib3.util.response, 'urllib3.packages.six.moves.urllib', urllib3.response
 missing module named socks - imported by urllib3.contrib.socks
 missing module named 'OpenSSL.crypto' - imported by urllib3.contrib.pyopenssl
@@ -46,4 +47,5 @@ missing module named psutil._psutil_aix - imported by psutil, psutil._psaix
 missing module named psutil._psutil_sunos - imported by psutil, psutil._pssunos
 missing module named psutil._psutil_bsd - imported by psutil, psutil._psbsd
 missing module named psutil._psutil_osx - imported by psutil, psutil._psosx
-missing module named psutil._psutil_windows - imported by psutil, psutil._pswindows
+missing module named _psutil_linux - imported by psutil
+missing module named psutil._psutil_posix - imported by psutil, psutil._pslinux, psutil._psosx, psutil._psbsd, psutil._pssunos, psutil._psaix

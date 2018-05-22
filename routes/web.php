@@ -11,4 +11,4 @@
 |
 */
 
-Route::get('/{any}', 'AppController@index')->where('any', '.*');
+Route::get('/{any}', 'MoniController@index')->where('any', '.*');

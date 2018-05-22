@@ -44,9 +44,9 @@ def addrs():
 
 def data():
 
-    url = 'http://localhost:8000/api/data?api_token=' + sys.argv[2]
+    url = 'https://moni.erik.cat/api/data?api_token=' + sys.argv[1]
     payload = {
-        'server': sys.argv[1],
+        'server': sys.argv[2],
         'os': platform.system(),
         'version': platform.release(),
         'platform': platform.platform(),
@@ -73,31 +73,37 @@ def data():
             'pids': len(psutil.pids())
         }
     }
-    print(payload)
-    print()
-    print()
-    r = requests.post(url, json = payload, headers = {'Accept': 'application/json'})
 
-    if r.status_code == 200:
-        print (r.json()) # 200 is good
-    else:
-        try:
-            data = r.json()
-            print (data)
-        except:
-            pass
+    try:
+        r = requests.post(url, json = payload, headers = {'Accept': 'application/json'})
+        if r.status_code == 200:
+            print('Data sent to the server')
+        else:
+            print(r.json())
+            print ('There was an error with the request.')
+    except:
         print ('There was an error with the request.')
 
-def main():
+def main(interval):
     while True:
         d = data()
-        time.sleep(60)
+        time.sleep(interval)
 
 if __name__ == "__main__":
     if len(sys.argv) == 1:
-        print('The server_name is missing, please enter a server name as a first parameter. It will be created if it did not exist')
+        print('The api_token is missing, please enter the API token as the first parameter')
         sys.exit(0)
     if len(sys.argv) == 2:
-        print('The api_token is missing, please enter the API token as the second parameter')
+        print('The server_name is missing, please enter a server name as a second parameter. It will be created if it did not exist')
         sys.exit(0)
-    main()
+    if len(sys.argv) == 3:
+        interval = 60
+    elif len(sys.argv) > 3:
+        interval = sys.argv[3]
+        try:
+            interval = int(interval)
+        except:
+            print('Wrong interval')
+            sys.exit(0)
+    print('Interval set to ' + str(interval) + ' seconds')
+    main(interval)
