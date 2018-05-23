@@ -7,7 +7,7 @@
                 </v-card-title>
                 <v-container fill-height fluid>
                         <v-layout fill-height wrap>
-                            <v-flex xs12>
+                            <v-flex xs12 style="overflow-y: auto;">
                                 <p>
                                     To add a new server to the monitoring system, download the tool for the
                                     desired platform and execute it with the following parameters
