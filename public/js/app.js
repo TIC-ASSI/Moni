@@ -34762,8 +34762,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     created: function created() {
         this.getServer();
-        console.log('OK');
-        Pusher.logToConsole = true;
         var pusher = new Pusher('b5732d274e9b079e5ccb', {
             cluster: 'eu',
             encrypted: true
@@ -35370,7 +35368,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 url = '/app/' + name;
             }
             window.location.href = url;
-            console.log('OK');
         },
         timeAt: function timeAt(at) {
             return moment(at).fromNow();
@@ -35378,6 +35375,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     created: function created() {
         this.getServers();
+        var pusher = new Pusher('b5732d274e9b079e5ccb', {
+            cluster: 'eu',
+            encrypted: true
+        });
+        var channel = pusher.subscribe('servers_' + this.$store.state.user.id);
+        channel.bind('update', this.getServers);
     },
 
     watch: {
