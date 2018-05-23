@@ -257,8 +257,6 @@
         },
         created() {
             this.getServer()
-            console.log('OK')
-            Pusher.logToConsole = true;
             var pusher = new Pusher('b5732d274e9b079e5ccb', {
                 cluster: 'eu',
                 encrypted: true

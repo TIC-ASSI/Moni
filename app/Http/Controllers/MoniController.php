@@ -223,6 +223,7 @@ class MoniController extends Controller
         ]);
 
         Pusher::trigger('server_' . $server->id, 'update', 'ok');
+        Pusher::trigger('servers_' . $user->id, 'update', 'ok');
 
         return [
             'response' => 'ok'

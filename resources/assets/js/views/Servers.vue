@@ -157,7 +157,6 @@
                     url = '/app/' + name
                 }
                 window.location.href = url;
-                console.log('OK')
             },
             timeAt(at) {
                 return moment(at).fromNow()
@@ -165,6 +164,12 @@
         },
         created() {
             this.getServers()
+            var pusher = new Pusher('b5732d274e9b079e5ccb', {
+                cluster: 'eu',
+                encrypted: true
+            });
+            var channel = pusher.subscribe('servers_' + this.$store.state.user.id);
+            channel.bind('update', this.getServers);
         },
         watch: {
             '$route': 'getServers'
