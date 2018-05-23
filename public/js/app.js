@@ -34044,8 +34044,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     methods: {
@@ -34075,8 +34073,6 @@ var render = function() {
           attrs: { dark: "", color: "primary", extended: "", tabs: "", app: "" }
         },
         [
-          _c("v-toolbar-side-icon"),
-          _vm._v(" "),
           _c("v-toolbar-title", [_vm._v("Monitoring")]),
           _vm._v(" "),
           _c(
@@ -34084,7 +34080,6 @@ var render = function() {
             {
               attrs: {
                 slot: "extension",
-                "align-with-title": "",
                 color: "primary",
                 "slider-color": "white"
               },
@@ -35495,83 +35490,90 @@ var render = function() {
                     "v-layout",
                     { attrs: { "fill-height": "", wrap: "" } },
                     [
-                      _c("v-flex", { attrs: { xs12: "" } }, [
-                        _c("p", [
-                          _vm._v(
-                            "\n                                Download the native application for the desired platform. To execute it\n                                we provide an example command to be executed on the download path of the application:\n                            "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "p",
-                          [
-                            _c(
-                              "v-btn",
-                              {
-                                attrs: { color: "primary" },
-                                on: {
-                                  click: function($event) {
-                                    _vm.download("linux")
+                      _c(
+                        "v-flex",
+                        {
+                          staticStyle: { "overflow-y": "auto" },
+                          attrs: { xs12: "" }
+                        },
+                        [
+                          _c("p", [
+                            _vm._v(
+                              "\n                                Download the native application for the desired platform. To execute it\n                                we provide an example command to be executed on the download path of the application:\n                            "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "p",
+                            [
+                              _c(
+                                "v-btn",
+                                {
+                                  attrs: { color: "primary" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.download("linux")
+                                    }
                                   }
-                                }
-                              },
-                              [_vm._v("Linux Download")]
-                            ),
-                            _vm._v(" "),
-                            _c("br"),
-                            _vm._v(" "),
-                            _c("code", [
-                              _vm._v(
-                                "./monitoring " +
-                                  _vm._s(_vm.$store.state.user.api_token) +
-                                  " Server1 60"
-                              )
-                            ])
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "p",
-                          [
-                            _c(
-                              "v-btn",
-                              {
-                                attrs: { color: "primary" },
-                                on: {
-                                  click: function($event) {
-                                    _vm.download("windows")
+                                },
+                                [_vm._v("Linux Download")]
+                              ),
+                              _vm._v(" "),
+                              _c("br"),
+                              _vm._v(" "),
+                              _c("code", [
+                                _vm._v(
+                                  "./monitoring " +
+                                    _vm._s(_vm.$store.state.user.api_token) +
+                                    " Server1 60"
+                                )
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "p",
+                            [
+                              _c(
+                                "v-btn",
+                                {
+                                  attrs: { color: "primary" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.download("windows")
+                                    }
                                   }
-                                }
-                              },
-                              [_vm._v("Windows Download")]
+                                },
+                                [_vm._v("Windows Download")]
+                              ),
+                              _vm._v(" "),
+                              _c("br"),
+                              _vm._v(" "),
+                              _c("code", [
+                                _vm._v(
+                                  ".\\monitoring.exe " +
+                                    _vm._s(_vm.$store.state.user.api_token) +
+                                    " Server1 60"
+                                )
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v(
+                              "\n                                This example code will create a server named "
                             ),
-                            _vm._v(" "),
-                            _c("br"),
-                            _vm._v(" "),
-                            _c("code", [
-                              _vm._v(
-                                ".\\monitoring.exe " +
-                                  _vm._s(_vm.$store.state.user.api_token) +
-                                  " Server1 60"
-                              )
-                            ])
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c("p", [
-                          _vm._v(
-                            "\n                                This example code will create a server named "
-                          ),
-                          _c("b", [_vm._v("Server1")]),
-                          _vm._v(
-                            " with a refresh\n                                interval of "
-                          ),
-                          _c("b", [_vm._v("60")]),
-                          _vm._v(" seconds.\n                            ")
-                        ])
-                      ])
+                            _c("b", [_vm._v("Server1")]),
+                            _vm._v(
+                              " with a refresh\n                                interval of "
+                            ),
+                            _c("b", [_vm._v("60")]),
+                            _vm._v(" seconds.\n                            ")
+                          ])
+                        ]
+                      )
                     ],
                     1
                   )

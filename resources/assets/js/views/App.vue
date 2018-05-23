@@ -1,11 +1,9 @@
 <template>
     <v-app>
         <v-toolbar dark color="primary" extended tabs app>
-            <v-toolbar-side-icon></v-toolbar-side-icon>
             <v-toolbar-title>Monitoring</v-toolbar-title>
             <v-tabs
                 slot="extension"
-                align-with-title
                 color="primary"
                 slider-color="white"
             >

@@ -42,7 +42,7 @@
                 </v-card-title>
                 <v-container fill-height fluid>
                         <v-layout fill-height wrap>
-                            <v-flex xs12>
+                            <v-flex xs12 style="overflow-y: auto;">
                                 <p>
                                     Download the native application for the desired platform. To execute it
                                     we provide an example command to be executed on the download path of the application:
