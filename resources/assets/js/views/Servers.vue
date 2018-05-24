@@ -50,6 +50,7 @@
                                 <p>
                                     <v-btn @click="download('linux')" color="primary">Linux Download</v-btn>
                                     <br>
+                                    <code>chmod u+x ./monitoring</code><br>
                                     <code>./monitoring {{ $store.state.user.api_token }} Server1 60</code>
                                 </p>
                                 <p>
