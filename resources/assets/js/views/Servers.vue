@@ -164,7 +164,7 @@
                 window.location.href = url;
             },
             timeDiff(at) {
-                return moment().diff(moment(at), 'seconds')
+                return moment().diff(moment(at.updated_at), 'seconds')
             },
             timeAt(at) {
                 return moment(at).fromNow()
