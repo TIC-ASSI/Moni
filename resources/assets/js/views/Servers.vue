@@ -90,6 +90,7 @@
                         { text: 'Platform', value: 'platform' },
                         { text: 'Processor', value: 'processor' },
                         { text: 'Last update', value: 'updated_at' },
+                        { text: 'Online' },
                         { text: 'Options' },
                     ]"
                     :loading="!loaded"
