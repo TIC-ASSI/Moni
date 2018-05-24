@@ -172,6 +172,7 @@
         },
         created() {
             this.getServers()
+            setInterval(this.getServers, 5000)
             var pusher = new Pusher('b5732d274e9b079e5ccb', {
                 cluster: 'eu',
                 encrypted: true
