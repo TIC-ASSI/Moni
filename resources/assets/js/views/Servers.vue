@@ -164,6 +164,8 @@
                 window.location.href = url;
             },
             timeDiff(at) {
+                console.log(moment(at.updated_at))
+                console.log(moment().diff(moment(at.updated_at), 'seconds'))
                 return moment().diff(moment(at.updated_at), 'seconds')
             },
             timeAt(at) {
