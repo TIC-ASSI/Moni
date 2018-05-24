@@ -106,6 +106,10 @@
                         <td>{{ props.item.processor }}</td>
                         <td>{{ timeAt(props.item.updated_at) }}</td>
                         <td>
+                            <v-icon :color="timeDiff(props.item) < 65 ? 'green' : 'red'">fiber_manual_record</v-icon>
+                            {{ timeDiff(props.item) < 65 ? 'Online' : 'Offline' }}
+                        </td>
+                        <td>
                             <v-btn icon class="mx-0" :to="{ name: 'server', params: { id: props.item.id } }">
                                 <v-icon color="grey">remove_red_eye</v-icon>
                             </v-btn>
@@ -158,6 +162,9 @@
                     url = '/app/' + name
                 }
                 window.location.href = url;
+            },
+            timeDiff(at) {
+                return moment().diff(moment(at), 'seconds')
             },
             timeAt(at) {
                 return moment(at).fromNow()
