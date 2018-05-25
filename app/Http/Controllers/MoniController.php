@@ -104,7 +104,7 @@ class MoniController extends Controller
         // Aixo es tot de tot
         // $server->load(['cpus', 'nets', 'nets.addresses', 'disks', 'mems', 'pids']);
 
-        $server->current = [
+        $server['current'] = [
             'cpu' => $server->cpus()->where('time_id', null)->first(),
             'net' => $server->nets()->where('time_id', null)->with('addresses')->first(),
             'disks' => $server->disks()->where('time_id', null)->get(),
