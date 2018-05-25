@@ -147,6 +147,8 @@ class MoniController extends Controller
             'processor' => $request->get('processor'),
             'platform'   => $request->get('platform'),
         ]);
+        
+        $server->touch();
 
         $data = $request->get('data');
 
